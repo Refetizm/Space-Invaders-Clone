@@ -1,6 +1,5 @@
-#ifndef __BULLET_POOL_H_
-#define __BULLET_POOL_H_
-
+#ifndef __BULLET_POOL_H__
+#define __BULLET_POOL_H__
 
 #include "Definitions.h"
 #include <list>
@@ -11,29 +10,11 @@ class BulletPool
 {
 private:
 	BulletPool(){}
-
 public:
 	static BulletPool* getBullets();
 	BulletSprite* getSprite(int);
 	void returnBullet(BulletSprite*);
 private:
-	static BulletPool* _pBullets;
-	std::list<BulletSprite*> _theEnemyVec;
-	std::list<BulletSprite*> _theBulletVec;
+	static BulletPool* bulletInstance;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endif // !__BULLET_POOL_H_
+#endif // !__BULLET_POOL_H__

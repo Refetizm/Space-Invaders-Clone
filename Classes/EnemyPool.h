@@ -9,16 +9,12 @@ class EnemySprite;
 class EnemyPool
 {
 private:
-	EnemyPool(){}
-
+	EnemyPool() {}
 public:
 	static EnemyPool* getEnemy();
 	EnemySprite* getEnemySprite(int);
 	void returnEnemy(EnemySprite*);
-
 private:
-	static EnemyPool* poolEnemy;
-	std::list<EnemySprite*> _theEnemyVec;
-	std::list<EnemySprite*> _theBulletVec;
- };
+	static EnemyPool* enemyInstance;
+};
 #endif // !__ENEMY_POOL_H__

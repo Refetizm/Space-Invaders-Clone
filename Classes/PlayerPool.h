@@ -4,7 +4,6 @@
 #include "Definitions.h"
 #include <list>
 
-
 class PlayerSprite;
 
 class PlayerPool
@@ -16,8 +15,6 @@ public:
 	PlayerSprite* getPlayerSprite(int);
 	void returnPlayer(PlayerSprite*);
 private:
-	static PlayerPool* poolPlayer;
-	std::list<PlayerSprite*> _theEnemyVec;
-	std::list<PlayerSprite*> _theEbeninVec;
+	static PlayerPool* playerInstance;
 };
 #endif // !__PLAYER_POOL_H__

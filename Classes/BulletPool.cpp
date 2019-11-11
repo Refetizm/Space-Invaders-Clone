@@ -1,27 +1,29 @@
 #include "BulletPool.h"
 #include "Bullet.h"
 
-BulletPool* BulletPool::_pBullets = nullptr;
+BulletPool* BulletPool::bulletInstance = nullptr;											//In the begining our pool is empty.
 
+//----------GENERATING POOL----------//
 BulletPool* BulletPool::getBullets()
 {
-	if (_pBullets == nullptr)
+	if (bulletInstance == nullptr)
 	{
-		_pBullets = new BulletPool;
+		bulletInstance = new BulletPool;													//if the pool is empty, generate a new pool.
 	}
-	return _pBullets;
+	return bulletInstance;
 }
 
-BulletSprite* BulletPool::getSprite(int refetizm)
+//----------GENERATING SPRITE IN THE POOL----------//
+BulletSprite* BulletPool::getSprite(int bulletIdTag)
 {
-	if (refetizm == BULLET_TAG)
+	if (bulletIdTag == BULLET_ID_TAG)
 	{
-		return BulletSprite::createSprite(refetizm);
+		return BulletSprite::createSprite(bulletIdTag);										//if the 'bulletIdTag' equals to 'BULLET_ID_TAG', generate new Player sprite in the PlayerPool.
 	}
 }
 
-void BulletPool::returnBullet(BulletSprite* object)
+//----------RETURN UNUSED OBJECTS----------//
+void BulletPool::returnBullet(BulletSprite* bulletObject)
 {
-	object->reset();
-	
+	bulletObject->reset();																	//This function is used to return unused sprites(removed, destroyed etc.) from GameScene to the pool.
 }

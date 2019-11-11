@@ -1,26 +1,29 @@
 #include "PlayerPool.h"
 #include "Player.h"
 
-PlayerPool* PlayerPool::poolPlayer = nullptr;
+PlayerPool* PlayerPool::playerInstance = nullptr;								//In the begining our pool is empty.
 
+//----------GENERATING POOL----------//
 PlayerPool* PlayerPool::getPlayer()
 {
-	if (poolPlayer == nullptr)
+	if (playerInstance == nullptr)
 	{
-		poolPlayer = new PlayerPool;
+		playerInstance = new PlayerPool;										//if the pool is empty, generate a new pool.
 	}
-	return poolPlayer;
+	return playerInstance;
 }
 
-PlayerSprite* PlayerPool::getPlayerSprite(int kargaizm)
+//----------GENERATING SPRITE IN THE POOL----------//
+PlayerSprite* PlayerPool::getPlayerSprite(int playerIdTag)
 {
-	if (kargaizm == PLAYER_TAG)
+	if (playerIdTag == PLAYER_ID_TAG)
 	{
-		return PlayerSprite::createSprite(kargaizm);
+		return PlayerSprite::createSprite(playerIdTag);						//if the 'playerIdTag' equals to 'PLAYER_ID_TAG', generate new Player sprite in the PlayerPool.
 	}
 }
 
-void PlayerPool::returnPlayer(PlayerSprite* object)
+//----------RETURN UNUSED OBJECTS----------//
+void PlayerPool::returnPlayer(PlayerSprite* playerObject)
 {
-	object->reset();
+	playerObject->reset();													//This function is used to return unused sprites(removed, destroyed etc.) from GameScene to the pool.
 }

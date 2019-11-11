@@ -1,26 +1,29 @@
 #include "EnemyPool.h"
 #include "Enemy.h"
 
-EnemyPool* EnemyPool::poolEnemy = nullptr;
+EnemyPool* EnemyPool::enemyInstance = nullptr;									//In the begining our pool is empty.
 
+//----------GENERATING POOL----------//
 EnemyPool* EnemyPool::getEnemy()
 {
-	if (poolEnemy == nullptr)
+	if (enemyInstance == nullptr)
 	{
-		poolEnemy = new EnemyPool;
+		enemyInstance = new EnemyPool;											//if the pool is empty, generate a new pool.
 	}
-	return poolEnemy;
+	return enemyInstance;
 }
 
-EnemySprite* EnemyPool::getEnemySprite(int captain)
+//----------GENERATING SPRITE IN THE POOL----------//
+EnemySprite* EnemyPool::getEnemySprite(int enemyIdTag)
 {
-	if (captain == ENEMY_TAG)
+	if (enemyIdTag == ENEMY_ID_TAG)
 	{
-		return EnemySprite::createSprite(captain);
+		return EnemySprite::createSprite(enemyIdTag);							//if the 'enemyIdTag' equals to 'ENEMY_ID_TAG', generate new Enemy sprite in the EnemyPool.
 	}
 }
 
-void EnemyPool::returnEnemy(EnemySprite* object)
+//----------RETURN UNUSED OBJECTS----------//
+void EnemyPool::returnEnemy(EnemySprite* enemyObject)
 {
-	object->reset();
+	enemyObject->reset();														//This function is used to return unused sprites(removed, destroyed etc.) from GameScene to the pool.
 }
